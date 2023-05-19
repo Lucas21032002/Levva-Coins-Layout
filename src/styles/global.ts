@@ -23,6 +23,8 @@ export const GlobalStyle = createGlobalStyle`
 export const Form = styled.form`
     display: flex;
     flex-direction: column;
+    align-items: center;
+
     padding-top: 1rem;
 `
 export const FormInput = styled.input`
@@ -32,6 +34,7 @@ export const FormInput = styled.input`
 
     padding: 1rem;
     border-radius: 6px;
+    width: 100%;
 
     & + & {
         margin-top: 1rem;
@@ -39,9 +42,10 @@ export const FormInput = styled.input`
 `
 export const FormButton = styled.button`
     background: ${(props) => props.theme["yellow-300"]};
+    width: 100%;
     
     padding: 1rem 0;
-    margin-top: 1rem;
+    margin-top: 1.5rem;
 
     border-radius: 6px;
     border: 1px solid ${(props) => props.theme["yellow-300"]};
@@ -60,3 +64,31 @@ export const Links = styled.a`
     color: ${(props) => props.theme["yellow-500"]};
     margin-top: 1rem;
 `
+
+interface TransactionTypeButtonProps {
+    variant: "income" | "outcome";
+}
+
+export const TransactionTypeContainer = styled.div`
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: 1rem;
+    gap: 1rem;
+    width: 100%;
+`;
+
+export const TransactionTypeButton = styled.button<TransactionTypeButtonProps>`
+    cursor: pointer;
+    background: ${props => props.theme["gray-700"]};
+    color:  ${(props) => props.theme["gray-300"]};
+   
+    border-radius: 6px;
+    border: 0;
+   
+    padding: 1rem;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+`;
