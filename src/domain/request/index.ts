@@ -1,4 +1,4 @@
 export interface RequestError {
     hasError: boolean;
-    massage: string;
+    message: string;
 }

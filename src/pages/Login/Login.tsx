@@ -5,6 +5,10 @@ import { useForm } from 'react-hook-form'; // pesquisar sobre useForm
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup';
 
+import LoginUseCase from "../../useCases/LoginUseCase/LoginUseCase";
+import { useStore } from "effector-react";
+import LoginStore from "../../stores/LoginStore/LoginStore"
+
 
 //validações com yup
 interface FormProps {
@@ -25,14 +29,14 @@ const formSchema = yup
     .required();
 
 export function Login() {
+    const { isLoading, hasError, errorMessage } = useStore(LoginStore)
     
     const {register, handleSubmit, formState: { errors }} = useForm<FormProps>({
         resolver: yupResolver(formSchema)
     })
 
     function handleLogin ({email, password}: FormProps) {
-        console.log({email, password});
-        //chamar nossa api
+        LoginUseCase.execute({email, password});
     }
 
     return (
@@ -43,9 +47,10 @@ export function Login() {
 
                 <FormInput {...register("password")} type="password" placeholder="Senha"></FormInput>
                 {errors.password && <FormError>{errors.password.message}</FormError>}
+                {hasError && <FormError>{errorMessage}</FormError>}
 
                 <Links href="#">Não tem conta? Cadastre-se aqui.</Links>
-                <FormButton type="submit">Entrar</FormButton>
+                <FormButton type="submit">{isLoading ? "Carregando..." : "Entrar"}</FormButton>
             </Form>
         </AuthLayout>
     )

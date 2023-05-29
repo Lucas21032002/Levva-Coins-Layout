@@ -139,7 +139,7 @@
       "responses": [
         {
           "uuid": "174298c1-c5a0-46dc-9083-ffa0f68b6de3",
-          "body": "{\n  \"id\": \"{{guid}}\",\n  \"email\": \"email@email.com\",\n  \"token\": \"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwiaWQiOiI0YjFmMWY1Yy1jMjQxLTQ3MDgtYTE2My0yNDY3YzY0ZmQyMmIiLCJuYW1lIjoiSm9obiBEb2UiLCJlbWFpbCI6Impob24uZG9lQGxldnZhLmlvIiwiaWF0IjoxNTE2MjM5MDIyfQ.A9d_tEkfS4Qf4vcaSGpz1BISb70QAShANFPE1Evy8iw\"\n}",
+          "body": "{\n  \"id\": \"{{guid}}\",\n  \"email\": \"email@email.com\",\n  \"name\": \"jhon doe\"\n  \"token\": \"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwiaWQiOiI0YjFmMWY1Yy1jMjQxLTQ3MDgtYTE2My0yNDY3YzY0ZmQyMmIiLCJuYW1lIjoiSm9obiBEb2UiLCJlbWFpbCI6Impob24uZG9lQGxldnZhLmlvIiwiaWF0IjoxNTE2MjM5MDIyfQ.A9d_tEkfS4Qf4vcaSGpz1BISb70QAShANFPE1Evy8iw\"\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "User authenticated",
@@ -450,6 +450,18 @@
     {
       "key": "Content-Type",
       "value": "application/json"
+    },
+    {
+      "key": "Access-Control-Allow-Origin",
+      "value": "*"
+    },
+    {
+      "key": "Access-Control-Allow-Methods",
+      "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+    },
+    {
+      "key": "Access-Control-Allow-Headers",
+      "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
     }
   ],
   "proxyReqHeaders": [

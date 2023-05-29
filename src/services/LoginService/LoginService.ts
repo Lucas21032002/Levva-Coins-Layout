@@ -2,7 +2,8 @@ import { AxiosError } from "axios";
 
 import Api from "../../clients/api/api";
 
-import { LoginParams, LoginValues, LoginError } from "../../domain/login";
+import { LoginParams, LoginValues } from "../../domain/login";
+import { RequestError } from "../../domain/request";
 
 const authenticateUser = async ({
     email,
@@ -18,7 +19,7 @@ const authenticateUser = async ({
     .then((response) => {
         return response.data;
     })
-    .catch((err: AxiosError<LoginError>) => { //tipando um tipo (????)
+    .catch((err: AxiosError<RequestError>) => { //tipando um tipo (????)
         throw err.response?.data
     })
 }
