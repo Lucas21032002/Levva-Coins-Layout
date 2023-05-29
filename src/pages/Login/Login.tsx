@@ -32,6 +32,7 @@ export function Login() {
 
     function handleLogin ({email, password}: FormProps) {
         console.log({email, password});
+        //chamar nossa api
     }
 
     return (
