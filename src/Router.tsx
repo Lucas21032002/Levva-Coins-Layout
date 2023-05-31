@@ -1,4 +1,4 @@
-import { Route, Navigate, createBrowserRouter, createRoutesFromElements } from 'react-router-dom'
+import { Route, Navigate, createBrowserRouter, createRoutesFromElements, Outlet } from 'react-router-dom'
 import { Login } from './pages/Login/Login'
 import { NewAccount } from './pages/NewAccount'
 import { Home } from './pages/Home/Home'

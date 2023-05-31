@@ -50,7 +50,7 @@ export function Login() {
                 {errors.password && <FormError>{errors.password.message}</FormError>}
                 {hasError && <FormError>{errorMessage}</FormError>}
 
-                <Links href="#">Não tem conta? Cadastre-se aqui.</Links>
+                <Links href="/new-account">Não tem conta? Cadastre-se aqui.</Links>
                 <FormButton type="submit">{isLoading ? "Carregando..." : "Entrar"}</FormButton>
             </Form>
         </AuthLayout>
