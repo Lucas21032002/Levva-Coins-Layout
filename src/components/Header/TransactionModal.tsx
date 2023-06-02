@@ -40,11 +40,11 @@ interface FormProps {
 const formSchema = yup
     .object({
         description: yup.string().required("O nome da transação é obrigatório"),
-        amount: yup.number().required("O valor da transação é obrigatório."),
+        amount: yup.number().required("O valor da transação é obrigatório.").typeError('O valor precisa de um número'),
         type: yup
             .string()
             .oneOf(["income", "outcome"])
-            .required("O Valor da transação é obrigatório"),
+            .required("O tipo da transação é obrigatório"),
         categoryId: yup
             .string()
             .required("A categoria da transação é obrigatória.")
@@ -77,6 +77,7 @@ export function TransactionModal() {
         type,
         categoryId,
     }: FormProps ) {
+        console.log({amount})
         NewTransactionUseCase.execute({
             description,
             amount,
@@ -124,7 +125,8 @@ export function TransactionModal() {
             
             <TransactionTypeContainer
                 {...register("type")}
-                onChange={(event) => setValue("type", event.target.value)}
+                //onChange={(event) => setValue("type", event.target.value)}
+                onValueChange={(value: "income" | "outcome") => setValue("type", value)}
             >
                 <TransactionTypeButton
                     value="income"
