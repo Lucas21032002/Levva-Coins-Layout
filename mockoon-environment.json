@@ -10,7 +10,7 @@
     {
       "uuid": "4a240829-c1d4-441f-a9fc-db9ff954bcfb",
       "name": "Users",
-      "collapsed": false,
+      "collapsed": true,
       "children": [
         {
           "type": "route",
@@ -27,12 +27,6 @@
       ]
     },
     {
-      "uuid": "2de3abfe-4843-42ce-ad57-ad53524de0b8",
-      "name": "Transactions",
-      "collapsed": true,
-      "children": []
-    },
-    {
       "uuid": "472724b3-e9df-4c96-85cf-afd8e9001e9d",
       "name": "Categories",
       "collapsed": false,
@@ -44,6 +38,21 @@
         {
           "type": "route",
           "uuid": "3265fe45-6eb6-4018-a183-2c68b6b97077"
+        }
+      ]
+    },
+    {
+      "uuid": "f40429ec-53b1-4bb0-9d34-1105001d2880",
+      "name": "Transactions",
+      "collapsed": false,
+      "children": [
+        {
+          "type": "route",
+          "uuid": "6b145d6c-cc06-4bb0-bd6f-5697f7bed2f7"
+        },
+        {
+          "type": "route",
+          "uuid": "df1b5656-b211-4d81-8e56-822c48cdf9e9"
         }
       ]
     }
@@ -308,9 +317,9 @@
             {
               "target": "body",
               "modifier": "description",
-              "value": "",
+              "value": "food",
               "invert": false,
-              "operator": "null"
+              "operator": "equals"
             }
           ],
           "rulesOperator": "OR",
@@ -413,6 +422,158 @@
       ],
       "enabled": true,
       "responseMode": null
+    },
+    {
+      "uuid": "df1b5656-b211-4d81-8e56-822c48cdf9e9",
+      "type": "http",
+      "documentation": "Create new transaction",
+      "method": "post",
+      "endpoint": "transactions",
+      "responses": [
+        {
+          "uuid": "c9bd19a1-d787-4885-97d2-4dedc8abc160",
+          "body": "",
+          "latency": 0,
+          "statusCode": 201,
+          "label": "Transaction created",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        },
+        {
+          "uuid": "790fe9bf-e40e-49de-8c49-3a770824c6dd",
+          "body": "{\n  \"hasError\": true,\n  \"message\": \"Invalid Transaction Params\"\n}",
+          "latency": 0,
+          "statusCode": 400,
+          "label": " Transaction invalid",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "type",
+              "value": "deposit",
+              "invert": true,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "type",
+              "value": "credit",
+              "invert": true,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        },
+        {
+          "uuid": "9fe3760f-136c-48c4-8727-f382001fd59a",
+          "body": "{\n  \"hasError\": true,\n  \"message\": \"unauthorized user\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized user",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "authorization",
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwiaWQiOiJhN2NjNTA0MS0wOWYyLTQwNTAtOTMwZS1kOGM0NWJkYTFmNGUiLCJlbWFpbCI6Impob24uZG9lQGxldnZhLmlvIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SOOjG6j674MCfw7KdUGA1Fg-A8b-ivQEmonBYboZd5A",
+              "invert": true,
+              "operator": "equals"
+            },
+            {
+              "target": "header",
+              "modifier": "authorization",
+              "value": "",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "6b145d6c-cc06-4bb0-bd6f-5697f7bed2f7",
+      "type": "http",
+      "documentation": "List all transactions",
+      "method": "get",
+      "endpoint": "transactions",
+      "responses": [
+        {
+          "uuid": "3aececa9-e812-45f8-b470-f607118c53f9",
+          "body": "[\n  {{#repeat 5 10}}\n  {\n    \"id\": \"{{guid}}\",\n    \"description\": \"{{faker 'commerce.department'}}\"\n  }\n  {{/repeat}}\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "List all transactions ",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        },
+        {
+          "uuid": "6667be65-0d98-4a55-8cd4-867441a5df46",
+          "body": "{\n  \"hasError\": true,\n  \"message\": \"unauthorized user\"\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "Unauthorized user",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "authorization",
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwiaWQiOiJhN2NjNTA0MS0wOWYyLTQwNTAtOTMwZS1kOGM0NWJkYTFmNGUiLCJlbWFpbCI6Impob24uZG9lQGxldnZhLmlvIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SOOjG6j674MCfw7KdUGA1Fg-A8b-ivQEmonBYboZd5A",
+              "invert": true,
+              "operator": "equals"
+            },
+            {
+              "target": "header",
+              "modifier": "authorization",
+              "value": "",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
     }
   ],
   "rootChildren": [
@@ -426,11 +587,11 @@
     },
     {
       "type": "folder",
-      "uuid": "2de3abfe-4843-42ce-ad57-ad53524de0b8"
+      "uuid": "472724b3-e9df-4c96-85cf-afd8e9001e9d"
     },
     {
       "type": "folder",
-      "uuid": "472724b3-e9df-4c96-85cf-afd8e9001e9d"
+      "uuid": "f40429ec-53b1-4bb0-9d34-1105001d2880"
     }
   ],
   "proxyMode": false,

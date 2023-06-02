@@ -46,6 +46,19 @@ export const FormError = styled.span`
     margin: 0.5rem 0 1rem;
 `
 
+export const FormSelect = styled.select`
+    font: 400 1rem "Roboto", sans-serif;
+    background: ${(props) => props.theme.black};
+    color: ${(props) => props.theme["white"]};
+    border: 0;
+
+    padding: 1rem;
+    border-radius: 6px;
+    width: 100%;
+
+    margin: 1rem auto;
+`
+
 export const FormButton = styled.button`
     background: ${(props) => props.theme["yellow-300"]};
     width: 100%;
