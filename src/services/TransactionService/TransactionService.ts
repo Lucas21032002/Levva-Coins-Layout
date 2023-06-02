@@ -30,7 +30,7 @@ const createTransaction = async ({
 
 const getTransactions = async () : Promise<TransactionValues[]> => {
     return Api.get({
-        url: "/transaction",
+        url: "/transactions",
     })
     .then((response) => {
         return response.data

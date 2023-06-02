@@ -551,7 +551,7 @@
       "responses": [
         {
           "uuid": "3aececa9-e812-45f8-b470-f607118c53f9",
-          "body": "[\n  {{#repeat 5 10}}\n  {\n    \"id\": \"{{guid}}\",\n    \"description\": \"{{faker 'commerce.productName'}}\",\n    \"amount\": {{toFixed (float 10.00 100.00) 2}},\n    \"type\": \"{{oneOf (array 0 1)}}\",\n    \"category\": { \n      \"id\": \"{{guid}}\",\n      \"description\": \"{{faker 'commerce.department'}}\"\n    },\n    \"createdAt\": \"{{now dd/MM/YYYY}}\"\n  }\n  {{/repeat}}\n]",
+          "body": "[\n  {{#repeat 5 10}}\n  {\n    \"id\": \"{{guid}}\",\n    \"description\": \"{{faker 'commerce.productName'}}\",\n    \"amount\": {{toFixed (float 10.00 100.00) 2}},\n    \"type\": {{oneOf (array 0 1)}},\n    \"category\": { \n      \"id\": \"{{guid}}\",\n      \"description\": \"{{faker 'commerce.department'}}\"\n    },\n    \"createdAt\": \"{{now 'dd/MM/YYYY'}}\"\n  }\n  {{/repeat}}\n]",
           "latency": 0,
           "statusCode": 200,
           "label": "List all transactions ",
