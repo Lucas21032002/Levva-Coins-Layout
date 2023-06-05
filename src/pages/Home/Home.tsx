@@ -4,11 +4,18 @@ import { SearchForm } from "../../components/SearchForm/Index";
 import { Summary } from "../../components/Summary/Index";
 import { HomeWrapper, PriceHighlight, TransactionContainer, TransactionTable, TransactionsTableEmpty } from "./style";
 import TransactionStore from "../../stores/TransactionStore/TransactionStore";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import GetTransactionUseCase from "../../useCases/GetTransactionsUseCase/GetTransactionsUseCase";
 
 export function Home() {
     const { isLoading, transactions} = useStore(TransactionStore) ;
+    const [ search, setSearch ] = useState("");
+    //const [searchFilter, setSearchFilter ] = useState("")
+    console.log(search)
+
+    //função de busca
+    const TransactionsFiltered  = transactions.filter((transaction) => transaction.description.toLowerCase().includes(search))
+    console.log(TransactionsFiltered)
 
     const moneyFormat = new Intl.NumberFormat("pt-BR", {
         style: "currency",
@@ -17,7 +24,6 @@ export function Home() {
 
     useEffect(() => {
         GetTransactionUseCase.execute();
-        console.log({transactions})
     }, [])
 
     return (
@@ -25,7 +31,7 @@ export function Home() {
             <HomeWrapper>
                 <Header/>
                 <Summary/>
-                <SearchForm/>
+                <SearchForm setSearch={setSearch} search={search} />
 
                 <TransactionContainer>
                     <TransactionTable>
@@ -36,7 +42,7 @@ export function Home() {
                             <td>Data</td>
                         </thead>
                         <tbody>
-                        {transactions.length > 0 && transactions.map((transaction) => (
+                        {TransactionsFiltered.length > 0 && TransactionsFiltered.map((transaction) => (
                             <tr>
                                 <td width="50%">{transaction.description}</td>
                                 <td>
@@ -49,6 +55,11 @@ export function Home() {
                             </tr>
                         ))}
                         </tbody>
+                        {!isLoading && TransactionsFiltered.length === 0 && (
+                        <TransactionsTableEmpty>
+                           Não achamos essa transação, confira se o nome digitado está correto!
+                        </TransactionsTableEmpty>
+                    )}
                     </TransactionTable>
                     {!isLoading && transactions.length === 0 && (
                         <TransactionsTableEmpty>
