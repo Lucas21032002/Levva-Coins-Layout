@@ -55,6 +55,7 @@ export function TransactionModal() {
     const closeModalRef = useRef<HTMLButtonElement>(null);
 
     const { categories } = useStore(CategoryStore);
+    console.log(categories)
     const { isLoading, hasError, errorMessage } = useStore(TransactionStore);
 
     const {
@@ -77,7 +78,6 @@ export function TransactionModal() {
         type,
         categoryId,
     }: FormProps ) {
-        console.log({amount})
         NewTransactionUseCase.execute({
             description,
             amount,

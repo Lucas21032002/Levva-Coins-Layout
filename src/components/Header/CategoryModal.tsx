@@ -47,6 +47,7 @@ export function CategoryModal () {
     return (
         <Modal 
         title="Nova categoria" 
+        closeModalRef={closeModalRef}
         trigger={<NewCategoryButton>Nova categoria</NewCategoryButton>}>
             <p>Cadastre uma categoria antes de criar uma transação</p>
             <Form onSubmit={handleSubmit(handleCreateCategory)}>

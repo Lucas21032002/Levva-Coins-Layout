@@ -11,11 +11,10 @@ export function Home() {
     const { isLoading, transactions} = useStore(TransactionStore) ;
     const [ search, setSearch ] = useState("");
     //const [searchFilter, setSearchFilter ] = useState("")
-    console.log(search)
 
     //função de busca
-    const TransactionsFiltered  = transactions.filter((transaction) => transaction.description.toLowerCase().includes(search))
-    console.log(TransactionsFiltered)
+    const TransactionsFiltered  = transactions.filter((transaction) => 
+        transaction.description.toLowerCase().includes(search) || transaction.category.description.toLowerCase().includes(search) )
 
     const moneyFormat = new Intl.NumberFormat("pt-BR", {
         style: "currency",
@@ -51,7 +50,8 @@ export function Home() {
                                     </PriceHighlight>
                                 </td>
                                 <td>{transaction.category.description}</td>
-                                <td>{transaction.createdAt}</td>
+                                <td>{transaction.createdAt}
+                                </td>
                             </tr>
                         ))}
                         </tbody>

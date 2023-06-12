@@ -4,6 +4,6 @@ import { RequestError } from "../../domain/request";
 import { CategoryValues } from "../../domain/category";
 
 export const loadCategory = createEvent("loadCategory");
-export const loadCreateCategoryDone = createEvent("loadCreateCategoryDone");
+export const loadCreateCategoryDone = createEvent<CategoryValues>("loadCreateCategoryDone");
 export const loadCategoryFail = createEvent<RequestError>("loadCategoryFail")
 export const loadCategoryDone = createEvent<CategoryValues[]>("loadCategoryDone");
