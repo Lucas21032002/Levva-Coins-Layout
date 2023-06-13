@@ -1,6 +1,6 @@
 import { loadCategory, loadCreateCategoryDone, loadCategoryFail } from "../../stores/NewCategoryStore/NewCategoryEvents";
 
-import { CategoryValues, newCategoryParams } from "../../domain/category";
+import { newCategoryParams } from "../../domain/category";
 import { RequestError } from "../../domain/request";
 import { NewCategoryService } from "../../services/CategoryService/CategoryService";
 

@@ -55,7 +55,6 @@ export function TransactionModal() {
     const closeModalRef = useRef<HTMLButtonElement>(null);
 
     const { categories } = useStore(CategoryStore);
-    console.log(categories)
     const { isLoading, hasError, errorMessage } = useStore(TransactionStore);
 
     const {

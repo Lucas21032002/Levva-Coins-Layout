@@ -35,10 +35,12 @@ export function Home() {
                 <TransactionContainer>
                     <TransactionTable>
                         <thead>
-                            <td>Descrição</td>
-                            <td>Preço</td>
-                            <td>Categoria</td>
-                            <td>Data</td>
+                            <tr>
+                                <td>Descrição</td>
+                                <td>Preço</td>
+                                <td>Categoria</td>
+                                <td>Data</td>
+                            </tr>
                         </thead>
                         <tbody>
                         {TransactionsFiltered.length > 0 && TransactionsFiltered.map((transaction) => (

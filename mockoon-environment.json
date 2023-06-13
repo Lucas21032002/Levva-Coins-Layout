@@ -459,7 +459,7 @@
       "responses": [
         {
           "uuid": "c9bd19a1-d787-4885-97d2-4dedc8abc160",
-          "body": "{\n    \"id\": \"{{guid}}\",\n    \"description\": \"teste aula\",\n    \"amount\": {{toFixed (float 10.00 100.00) 2}},\n    \"type\": {{oneOf (array 0 1)}},\n    \"category\": { \n      \"id\": \"{{guid}}\",\n      \"description\": \"{{faker 'commerce.department'}}\"\n    },\n    \"createdAt\": \"{{now 'dd/MM/YYYY'}}\"\n  }",
+          "body": "{\n    \"id\": \"{{guid}}\",\n    \"description\": \"{{body 'description'}}\",\n    \"amount\": {{toFixed (float 10.00 100.00) 2}},\n    \"type\": {{oneOf (array 0 1)}},\n    \"category\": { \n      \"id\": \"{{guid}}\",\n      \"description\": \"{{faker 'commerce.department'}}\"\n    },\n    \"createdAt\": \"{{now 'dd/MM/YYYY'}}\"\n  }",
           "latency": 0,
           "statusCode": 201,
           "label": "Transaction created",
