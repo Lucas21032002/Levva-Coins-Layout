@@ -1,7 +1,6 @@
 import Axios, { AxiosRequestConfig } from "axios";
 
-import { getApiHost } from "../../services/HostService/HostService"
-import { LoginValues } from "../../domain/login";
+import { getApiHost } from "../../services/HostService/HostService";
 
 export interface IRequest {
     url: string;
@@ -10,11 +9,9 @@ export interface IRequest {
 }
 
 Axios.interceptors.request.use((config) => {
-    const user = JSON.parse(
-        window.localStorage.getItem("user") ?? "{}"
-    ) as LoginValues;
+    const token = window.localStorage.getItem("token");
 
-    if(user.token) config.headers.Authorization = user.token;
+    if(token) config.headers.Authorization = `Bearer ${token}`;
 
     return config;
 })

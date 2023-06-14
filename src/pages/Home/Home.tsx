@@ -57,7 +57,7 @@ export function Home() {
                             </tr>
                         ))}
                         </tbody>
-                        {!isLoading && TransactionsFiltered.length === 0 && (
+                        { search === null && (
                         <TransactionsTableEmpty>
                            Não achamos essa transação, confira se o nome digitado está correto!
                         </TransactionsTableEmpty>

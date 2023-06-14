@@ -1,12 +1,11 @@
 import jwt from "jsonwebtoken";
-import { LoginValues } from "../domain/login";
 
 export function validateToken() {
-    const user = JSON.parse(window.localStorage.getItem("user") ?? '{}') as LoginValues;
+    const token = localStorage.getItem("token");
 
-    if(!user.token) return false
+    if(!token) return false;
 
-    return jwt.verify(user.token.split(" ")[1], "levva-coins-secret", (error) => {
+    return jwt.verify(token, "MySecretKeyforapp12", (error) => {
         return error ? false : true;
     });
 }

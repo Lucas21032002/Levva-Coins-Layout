@@ -92,11 +92,33 @@ export const UserAvatar = styled.img<UserAvatarProps>`
         box-shadow: 0px 0px 10px 20px #00000015;
     }
 
-    ${(props) => props.variant === "large" && 
+    ${(props) => props.variant === "large" &&
         css`
             width: 8rem;
             height: 8rem;
             margin-bottom: 1rem; 
         `
-}
+    }
 `;
+
+export const SignOutButton = styled.button`
+background: ${(props) => props.theme["gray-600"]};
+color: ${(props) => props.theme["white"]};
+width: 100%;
+
+padding: 1rem 0;
+margin-top: 1.5rem;
+
+border-radius: 6px;
+border: 1px solid ${(props) => props.theme["yellow-300"]};
+font-weight: bold;
+
+transition: all 0.5s ease;
+
+&:hover {
+  cursor: pointer;
+  background: ${(props) => props.theme["yellow-500"]};
+  border: 1px solid ${(props) => props.theme["yellow-500"]};
+  color: ${(props) => props.theme["black"]};
+}
+`

@@ -30,7 +30,6 @@ const formSchema = yup
 
 export function Login() {
     const { isLoading, hasError, errorMessage } = useStore(LoginStore)
-    console.log(errorMessage)
     
     const {register, handleSubmit, formState: { errors }} = useForm<FormProps>({
         resolver: yupResolver(formSchema)
