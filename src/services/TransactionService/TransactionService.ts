@@ -7,17 +7,21 @@ import { RequestError } from "../../domain/request";
 
 const createTransaction = async ({
     description,
-    amount,
+    price,
     type,
     categoryId,
+    userId,
+    category
 }: NewTransactionParams): Promise<void> => {
     return Api.post({
         url: "/Transaction",
         body: {
             description,
-            amount,
+            price,
             type,
             categoryId,
+            userId,
+            category
         },
     })
     .then((response) => {

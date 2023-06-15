@@ -6,15 +6,18 @@ import { HomeWrapper, PriceHighlight, TransactionContainer, TransactionTable, Tr
 import TransactionStore from "../../stores/TransactionStore/TransactionStore";
 import { useEffect, useState } from "react";
 import GetTransactionUseCase from "../../useCases/GetTransactionsUseCase/GetTransactionsUseCase";
+import CategoryStore from "../../stores/NewCategoryStore/NewCategoryStore";
 
 export function Home() {
     const { isLoading, transactions} = useStore(TransactionStore) ;
     const [ search, setSearch ] = useState("");
+    const { categories } = useStore(CategoryStore);
+
     //const [searchFilter, setSearchFilter ] = useState("")
 
     //função de busca
     const TransactionsFiltered  = transactions.filter((transaction) => 
-        transaction.description.toLowerCase().includes(search) || transaction.category.description.toLowerCase().includes(search) )
+        transaction.description.toLowerCase().includes(search))
 
     const moneyFormat = new Intl.NumberFormat("pt-BR", {
         style: "currency",
@@ -48,12 +51,11 @@ export function Home() {
                                 <td width="50%">{transaction.description}</td>
                                 <td>
                                     <PriceHighlight variant={transaction.type === 0 ? "income" : "outcome"}>
-                                        {moneyFormat.format(transaction.amount)}
+                                        {moneyFormat.format(transaction.price)}
                                     </PriceHighlight>
                                 </td>
-                                <td>{transaction.category.description}</td>
-                                <td>{transaction.createdAt}
-                                </td>
+                                <td>{categories.map((category) => category.id === transaction.categoryId ? category.description : "")}</td>
+                                <td>{transaction.date != null && transaction.date.split("T")[0] }</td>
                             </tr>
                         ))}
                         </tbody>

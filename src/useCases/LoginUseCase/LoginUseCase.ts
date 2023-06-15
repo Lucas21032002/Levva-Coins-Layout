@@ -9,11 +9,11 @@ const execute = async ({ email, password }: LoginParams): Promise<void> => {
          loadLoginFail({ hasError, message})
     }
 
-    loadLogin();
-
     return LoginService.authenticateUser({ email, password })
     .then(({ id, name, email, token }: LoginValues) => {
       window.localStorage.setItem("token", token);
+      window.localStorage.setItem("user", JSON.stringify({id, name, email}));
+
 
       loadLoginDone({ id, name, email, token });
 

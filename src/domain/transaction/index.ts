@@ -2,16 +2,19 @@ import { CategoryValues } from "../category";
 
 export interface NewTransactionParams {
     description: string;
-    amount: number;
+    price: number;
     type: number;
     categoryId: string;
+    userId: number;
+    category: string;
 }
 
 export interface TransactionValues {
     id: string;
     description: string;
-    amount: number;
+    price: number;
     type: number;
+    categoryId: string;
     category: CategoryValues;
-    createdAt: string;
+    date: string;
 }

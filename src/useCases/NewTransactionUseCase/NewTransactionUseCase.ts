@@ -1,22 +1,26 @@
 import { loadTransaction, loadCreateTransactionDone, loadTransactionFail } from "../../stores/TransactionStore/TransactionEvents";
 
-import { NewTransactionParams, TransactionValues } from "../../domain/transaction";
+import { NewTransactionParams } from "../../domain/transaction";
 import { RequestError } from "../../domain/request";
 import  TransactionService  from "../../services/TransactionService/TransactionService";
 
 const execute = async ({
     description,
-    amount,
+    price,
     type,
-    categoryId
+    categoryId,
+    userId,
+    category
 }: NewTransactionParams): Promise<void> => {
     loadTransaction();
 
     return TransactionService.createTransaction({
         description,
-        amount,
+        price,
         type,
-        categoryId
+        categoryId,
+        userId,
+        category
     })
         .then((transaction: any) => {
             loadCreateTransactionDone(transaction);

@@ -29,18 +29,21 @@ import {
         } from "../../styles/global";
 
 import { defaultTheme } from "../../styles/defaultTheme";
+import GetTransactionUseCase from "../../useCases/GetTransactionsUseCase/GetTransactionsUseCase";
 
 interface FormProps { 
     description: string;
-    amount: number,
+    price: number,
     type: string,
     categoryId: string;
+    userId: number;
+    category: string;
 }
 
 const formSchema = yup
     .object({
         description: yup.string().required("O nome da transação é obrigatório"),
-        amount: yup.number().required("O valor da transação é obrigatório.").typeError('O valor precisa de um número'),
+        price: yup.number().required("O valor da transação é obrigatório.").typeError('O valor precisa de um número'),
         type: yup
             .string()
             .oneOf(["income", "outcome"])
@@ -56,6 +59,7 @@ export function TransactionModal() {
 
     const { categories } = useStore(CategoryStore);
     const { isLoading, hasError, errorMessage } = useStore(TransactionStore);
+    const user = JSON.parse(window.localStorage.getItem("user") ?? "{}")
 
     const {
         register,
@@ -73,17 +77,24 @@ export function TransactionModal() {
 
     async function handleCreateTransaction ({
         description,
-        amount,
+        price,
         type,
         categoryId,
+        userId,
+        category
     }: FormProps ) {
         NewTransactionUseCase.execute({
             description,
-            amount,
+            price,
             type: type === "income" ? 0 : 1,
-            categoryId
+            categoryId,
+            userId: userId = user.id,
+            category
         }) 
-        .then(() => closeModalRef.current?.click())
+        .then(() => {
+            GetTransactionUseCase.execute();
+            closeModalRef.current?.click();
+        })
         .finally(() => reset())
     }
 
@@ -101,14 +112,14 @@ export function TransactionModal() {
             {errors.description && (<FormError>{errors.description.message}</FormError>)}
 
             <FormInput
-            {...register("amount")}
+            {...register("price")}
                 type="number"
                 placeholder="Valor"
                 step="0.1"
                 min="0"
                 max="999999"
             />
-            {errors.amount && <FormError>{errors.amount.message}</FormError>}
+            {errors.price && <FormError>{errors.price.message}</FormError>}
 
             <FormSelect {...register("categoryId")}>
                 <option value="" selected disabled hidden>
