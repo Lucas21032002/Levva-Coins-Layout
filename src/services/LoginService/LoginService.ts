@@ -19,7 +19,7 @@ const authenticateUser = async ({
     .then((response) => {
         return response.data;
     })
-    .catch((err: AxiosError<RequestError>) => { //tipando um tipo (????)
+    .catch((err: AxiosError<RequestError>) => {
         throw err.response?.data
     })
 }

@@ -13,8 +13,6 @@ export function Home() {
     const [ search, setSearch ] = useState("");
     const { categories } = useStore(CategoryStore);
 
-    //const [searchFilter, setSearchFilter ] = useState("")
-
     //função de busca
     const TransactionsFiltered  = transactions.filter((transaction) => 
         transaction.description.toLowerCase().includes(search))
@@ -23,6 +21,8 @@ export function Home() {
         style: "currency",
         currency: "BRL"
     })
+
+    console.log(categories) 
 
     useEffect(() => {
         GetTransactionUseCase.execute();
@@ -54,7 +54,7 @@ export function Home() {
                                         {moneyFormat.format(transaction.price)}
                                     </PriceHighlight>
                                 </td>
-                                <td>{categories.map((category) => category.id === transaction.categoryId ? category.description : "")}</td>
+                                <td>{categories.map((category) => category.id === transaction.category.id ? category.description : "")}</td>
                                 <td>{transaction.date != null && transaction.date.split("T")[0] }</td>
                             </tr>
                         ))}

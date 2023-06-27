@@ -12,7 +12,7 @@ const execute = async ({
     return NewCategoryService.createCategory({
         description
     })
-    .then((data: any) => { //duvida de tipagem
+    .then((data: any) => {
         loadCreateCategoryDone({id: data.id, description: data.description}); 
     })
     .catch(({hasError, message}: RequestError ) => {

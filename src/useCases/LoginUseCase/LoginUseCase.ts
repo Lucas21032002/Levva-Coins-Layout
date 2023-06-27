@@ -2,7 +2,7 @@ import { router } from "../../Router";
 import { LoginParams, LoginValues } from "../../domain/login";
 import { RequestError } from "../../domain/request";
 import { LoginService } from "../../services/LoginService/LoginService";
-import { loadLoginDone, loadLoginFail, loadLogin } from "../../stores/LoginStore/LoginEvents";
+import { loadLoginDone, loadLoginFail } from "../../stores/LoginStore/LoginEvents";
 
 const execute = async ({ email, password }: LoginParams): Promise<void> => {
     const errorCallback = ({ hasError, message}: RequestError) => {
